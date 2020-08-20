@@ -1,0 +1,15 @@
+[run]
+branch = True
+
+[report]
+fail_under = 90
+precision = 3
+
+omit =
+    noxfile.py
+    test/*
+    setup.py
+    .nox/*
+    .tox/*
+    .eggs/*
+    *.egg/*
