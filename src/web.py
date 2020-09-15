@@ -6,11 +6,15 @@ import locust
 
 def add_listener():
     @locust.events.init.add_listener
-    def on_locust_init(web_ui, **kw):
-        @web_ui.app.route("/status")
-        @web_ui.auth_required_if_enabled
+    def on_locust_init(environment, **kw):
+        if environment.web_ui is None:
+            # Don't add route on worker nodes, they do not have a web ui
+            return
+
+        @environment.web_ui.app.route("/status")
+        @environment.web_ui.auth_required_if_enabled
         def status():
-            runner = web_ui.environment.runner
+            runner = environment.runner
             return jsonify({
                 "state": runner.state,
                 "result": getattr(runner, 'result', None),
