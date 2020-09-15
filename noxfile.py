@@ -16,7 +16,7 @@ def test(session):
     session.install('.')
     session.install('-r', str(_TEST_DIR/'requirements.txt'))
     cov_rc_file_name = '.coverage_rc'  # The rcfile path is duplicated in .travis.yml
-    session.run('pytest', '--capture=sys', f'--cov={_HERE}', '--cov-report=term-missing', f'--cov-config={_TEST_DIR/cov_rc_file_name}', *session.posargs)
+    session.run('pytest', '--capture=sys', f'--cov', '--cov-report=term-missing', f'--cov-config={_TEST_DIR}/{cov_rc_file_name}', *session.posargs)
 
 
 @nox.session(python=_PY_VERSIONS, reuse_venv=True)

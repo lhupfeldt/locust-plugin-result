@@ -1,6 +1,11 @@
 [run]
 branch = True
 
+[paths]
+source =
+       src
+       **/site-packages/locust_plugin_result
+
 [report]
 fail_under = 90
 precision = 3
