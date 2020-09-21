@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
-from flask import jsonify
 import locust
+from flask import jsonify
 
 
 def add_listener():

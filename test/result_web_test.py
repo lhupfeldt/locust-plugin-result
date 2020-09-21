@@ -8,7 +8,8 @@ from locust.argument_parser import get_parser
 from locust.user import User, task
 from locust.test.testcases import LocustTestCase
 
-from locust_plugin_result import set_result, RESULT_FAIL, add_listener
+from locust_plugin_result.result import set_result, RESULT_FAIL
+from locust_plugin_result.web import add_listener
 
 
 class TestWebUI(LocustTestCase):
@@ -22,8 +23,7 @@ class TestWebUI(LocustTestCase):
         self.web_ui = self.environment.create_web_ui("127.0.0.1", 0)
         self.web_ui.app.view_functions["request_stats"].clear_cache()
 
-        # This is run when plugin is imported (normally in locustfile.py) but the locust_plugin_result import here happens before
-        # locust initialization, so execute again here
+        # This would normally be called in locustfile
         add_listener()
 
         # Fire locust init event which is normally done in main, after import of locustfile.py
